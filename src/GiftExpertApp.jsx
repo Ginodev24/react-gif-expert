@@ -7,9 +7,11 @@ export const GiftExpertApp = () => {
   const [categories, setCategories] = useState( ['One Punch','Dragon Ball']);
     
 
-  const onAddCategory = () => {
+  const onAddCategory = (newCategory) => {
     //setCategories( categories.push('Valorant') );  //El push marca error porque muta los arreglos y los hooks no mutan
-    setCategories( [ 'Valorant' , ...categories]);
+    if( categories.includes(newCategory) ) return;
+
+    setCategories( [ newCategory , ...categories]);
   };
 
 
@@ -20,7 +22,10 @@ export const GiftExpertApp = () => {
         <h1>GiftExpertApp</h1>
 
         {/*input */}
-        <AddCategory setCategories={setCategories}/>
+        <AddCategory 
+          //setCategories={setCategories}
+          onNewCategory={event => onAddCategory(event)}
+        />
 
         {/*listado de gift */}
             {/*gift item */}
