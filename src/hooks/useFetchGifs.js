@@ -7,14 +7,16 @@ export const useFetchGifs = ( {category} ) => {
     const [images, setImages] = useState([])
     const [isLoading, setIsLoading] = useState( true );
 
-
-    useEffect(() => {
-
-        getGifs(category)
-            .then(newImages => setImages(newImages));
+    
+    const getImages = async() => {
+        const newImages = await getGifs(category);
+        setImages(newImages);
         setIsLoading(false);
+    }
 
-    }, []);
+    useEffect( () => {
+        getImages();
+    },[]);
 
     return {
         images, //si la propiedad y el valor se llaman igual se puede obviar uno de los 2  => images: images
